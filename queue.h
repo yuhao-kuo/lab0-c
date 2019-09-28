@@ -12,6 +12,7 @@
  */
 
 #include <stdbool.h>
+#include <stddef.h>
 
 /************** Data structure declarations ****************/
 
@@ -30,6 +31,8 @@ typedef struct {
                         You will need to add more fields to this structure
                         to efficiently implement q_size and q_insert_tail
                       */
+    list_ele_t *tail; /* Linked list of elements */
+    size_t length;    /* this queue length */
 } queue_t;
 
 /************** Operations on queue ************************/
