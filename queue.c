@@ -112,8 +112,36 @@ bool q_insert_tail(queue_t *q, char *s)
 */
 bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
 {
-    /* You need to fix up this code. */
+    /* args checked */
+    if (q == NULL || q->head == NULL) {
+        return false;
+    }
+
+    list_ele_t *e = q->head;
+
+    if (sp != NULL) {
+        /* get the string length */
+        size_t len = strlen(e->value);
+        if (--bufsize < len) {
+            len = bufsize;
+        }
+
+        /* copy string to sp */
+        memcpy(sp, e->value, len);
+        *(sp + len) = '\0';
+    }
+
+    /* shift head to next */
+    if (e->next == NULL) {
+        q->tail = NULL;
+    }
     q->head = q->head->next;
+    q->length--;
+
+    /* release space (list element / string) */
+    free(e->value);
+    free(e);
+
     return true;
 }
 
