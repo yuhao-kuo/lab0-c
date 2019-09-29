@@ -99,7 +99,46 @@ bool q_insert_tail(queue_t *q, char *s)
 {
     /* You need to write the complete code for this function */
     /* Remember: It should operate in O(1) time */
-    return false;
+
+    list_ele_t *newt;
+    char *str;
+    size_t len;
+
+    /* q checked */
+    if (q == (queue_t *) NULL || s == (char *) NULL) {
+        return false;
+    }
+
+    /* alloc the element space */
+    newt = malloc(sizeof(list_ele_t));
+    if (newt == NULL) {
+        return false;
+    }
+
+    /* alloc the string copy space */
+    len = strlen(s);
+    str = malloc(sizeof(len + 1) << 3);  // len * 8
+    if (str == NULL) {
+        free(newt);
+        return false;
+    }
+
+    /* copy string to element */
+    memcpy(str, s, len);
+    str[len] = '\0';
+    newt->value = str;
+
+    /* insert to queue */
+    newt->next = NULL;
+    if (q->length > 0) {
+        q->tail->next = newt;
+    } else {
+        q->head = newt;
+    }
+    q->tail = newt;
+    q->length++;
+
+    return true;
 }
 
 /*
