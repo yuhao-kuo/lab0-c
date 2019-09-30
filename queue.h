@@ -32,7 +32,7 @@ typedef struct {
                         to efficiently implement q_size and q_insert_tail
                       */
     list_ele_t *tail; /* Linked list of elements */
-    size_t length;    /* this queue length */
+    int length;       /* this queue length */
 } queue_t;
 
 /************** Operations on queue ************************/
