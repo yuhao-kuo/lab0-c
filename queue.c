@@ -225,5 +225,25 @@ int q_size(queue_t *q)
  */
 void q_reverse(queue_t *q)
 {
-    /* You need to write the code for this function */
+    /* queue length is 0 or 1, not reversed. */
+    if (q == NULL || q->length < 2) {
+        return;
+    }
+
+    list_ele_t *eleh = q->head;  // list head
+    list_ele_t *elet = NULL;     // list tail
+    list_ele_t *tmp = NULL;      // reversr temp
+
+    /* reverse */
+    while (eleh != NULL) {
+        tmp = eleh->next;
+        eleh->next = elet;
+        elet = eleh;
+        eleh = tmp;
+    }
+
+    /* change head / tail pointer */
+    tmp = q->tail;
+    q->tail = q->head;
+    q->head = tmp;
 }
