@@ -87,7 +87,7 @@ bool q_insert_head(queue_t *q, char *s)
     }
 
     len = strlen(s) + 1;
-    str = malloc(sizeof(len) << 3);  // len * 8
+    str = malloc((strlen(s) + 1) * sizeof(char));
     if (str == NULL) {
         free(newh);
         return false;
@@ -138,7 +138,7 @@ bool q_insert_tail(queue_t *q, char *s)
 
     /* alloc the string copy space */
     len = strlen(s);
-    str = malloc(sizeof(len + 1) << 3);  // len * 8
+    str = malloc((len + 1) * sizeof(char));
     if (str == NULL) {
         free(newt);
         return false;
